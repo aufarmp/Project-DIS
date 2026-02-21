@@ -98,19 +98,21 @@
                                     ?>
                                     
                                     <?php if (!empty($authors)) : ?>
-                                        <div class="group/author relative inline-block cursor-pointer z-20">
+                                        <div class="group/author relative inline-block cursor-pointer">
+    
                                             <span class="inline-flex items-center gap-1 rounded bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary transition-colors group-hover/author:bg-primary group-hover/author:text-white border border-primary/20">
                                                 Lihat Detail <span class="material-symbols-outlined text-[14px]">expand_more</span>
                                             </span>
                                             
-                                            <div class="invisible absolute left-0 top-full mt-2 w-48 -translate-y-2 rounded-lg border border-white/10 bg-surface-dark p-2 opacity-0 shadow-xl transition-all duration-200 group-hover/author:visible group-hover/author:translate-y-0 group-hover/author:opacity-100">
+                                            <div class="invisible absolute left-0 top-full mt-2 w-48 -translate-y-2 rounded-lg border border-white/10 bg-surface-dark p-2 opacity-0 shadow-xl transition-all duration-200 group-hover/author:visible group-hover/author:translate-y-0 group-hover/author:opacity-100 z-50">
                                                 <ul class="flex flex-col text-sm">
                                                     <?php foreach($authors as $a) : ?>
                                                         <li class="flex flex-col border-b border-white/5 p-2 last:border-0 hover:bg-white/5 rounded transition-colors">
                                                             <span class="font-bold text-white"><?= esc($a->name) ?></span>
+                                                            
                                                             <?php 
                                                                 $roleLabel = match($a->role) {
-                                                                    'story' => 'Penulis Cerita',
+                                                                    'story' => 'Story Writer',
                                                                     'art'   => 'Ilustrator',
                                                                     'all'   => 'Story & Art',
                                                                     default => $a->role
@@ -121,6 +123,7 @@
                                                     <?php endforeach; ?>
                                                 </ul>
                                             </div>
+                                            
                                         </div>
                                     <?php else : ?>
                                         <span class="text-xs italic text-slate-500">Belum ada data</span>
