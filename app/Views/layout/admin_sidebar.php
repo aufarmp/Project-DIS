@@ -20,9 +20,14 @@
             <span class="text-sm font-medium">Kelola Komik</span>
         </a>
 
+        <a href="<?= base_url('admin/chapter') ?>" class="flex items-center gap-3 px-3 py-2.5 rounded-lg <?= current_url() == base_url('admin/chapter') ? 'bg-primary/10 text-primary border border-primary/20' : 'text-slate-400 hover:text-white hover:bg-white/5' ?> transition-colors group">
+            <span class="material-symbols-outlined <?= current_url() == base_url('admin/chapter') ? 'fill-1' : 'group-hover:text-primary' ?> transition-colors">menu_book</span>
+            <span class="text-sm font-medium">Kelola Chapter</span>
+        </a>
+
         <a href="<?= base_url('admin/users') ?>" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors group">
             <span class="material-symbols-outlined group-hover:text-primary transition-colors">group</span>
-            <span class="text-sm font-medium">Users</span>
+            <span class="text-sm font-medium">Daftar Pengguna</span>
         </a>
     </nav>
 

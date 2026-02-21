@@ -359,4 +359,5 @@ class Komik extends BaseController
         session()->setFlashdata('pesan', 'Komik "' . $komik->title . '" berhasil dihapus secara permanen beserta filenya.');
         return redirect()->to('/admin/komik');
     }
+
 }
