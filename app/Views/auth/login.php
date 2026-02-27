@@ -13,7 +13,7 @@
             <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent-purple text-white shadow-lg shadow-primary/30">
                 <span class="material-symbols-outlined text-2xl">lock</span>
             </div>
-            <h2 class="text-3xl font-bold tracking-tight text-white">Welcome Back</h2>
+            <h2 class="text-3xl font-bold tracking-tight text-white">Selamat Datang</h2>
             <p class="mt-2 text-sm text-text-secondary">
                 Lanjutkan petualangan membaca Anda di <span class="font-semibold text-primary">Comi</span>
             </p>

@@ -8,21 +8,33 @@
         <p class="text-sm text-text-secondary mt-1">Kelola informasi data diri dan akun Anda.</p>
     </div>
 
+    <?php if (session()->getFlashdata('pesan')) : ?>
+        <div class="mb-6 rounded-lg bg-green-500/10 border border-green-500/20 p-4 text-sm text-green-400 font-medium">
+            <?= session()->getFlashdata('pesan') ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('error')) : ?>
+        <div class="mb-6 rounded-lg bg-red-500/10 border border-red-500/20 p-4 text-sm text-red-400 font-medium">
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
+
     <div class="rounded-2xl bg-background-card p-6 sm:p-8 ring-1 ring-white/5 shadow-xl">
         <form action="<?= base_url('user/profile/update') ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field() ?>
             
             <div class="mb-8 flex items-center gap-6">
                 <div class="relative h-24 w-24 rounded-full bg-gradient-to-br from-primary to-accent-purple flex items-center justify-center text-3xl font-bold text-white shadow-lg overflow-hidden">
-                    <?php if(session()->get('profile_picture')) : ?>
-                        <img src="<?= base_url('assets/profiles/' . session()->get('profile_picture')) ?>" class="h-full w-full object-cover">
+                    <?php if(session()->get('profile_picture') && session()->get('profile_picture') !== '') : ?>
+                        <img src="<?= base_url('users/' . session()->get('profile_picture')) ?>" class="h-full w-full object-cover" alt="Profile Picture">
                     <?php else: ?>
                         <?= strtoupper(substr(session()->get('username'), 0, 1)) ?>
                     <?php endif; ?>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-white mb-2">Ubah Foto Profil</label>
-                    <input type="file" name="profile_picture" class="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/20 file:text-primary hover:file:bg-primary/30 transition-all cursor-pointer">
+                    <input type="file" name="profile_picture" accept="image/png, image/jpeg, image/jpg, image/webp" class="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/20 file:text-primary hover:file:bg-primary/30 transition-all cursor-pointer">
                     <p class="mt-1 text-xs text-slate-500">PNG, JPG maksimal 2MB.</p>
                 </div>
             </div>

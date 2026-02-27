@@ -49,10 +49,11 @@ class Dashboard extends BaseController
             $komikAuthors[$k->komik_id] = $authors;
         }
 
-        $data = [
+$data = [
             'title'         => 'Dashboard Admin',
-            'total_komik'   => $this->komikModel->countAll(), 
-            'total_user'    => $this->userModel->countAll(),
+            'total_komik'   => $this->komikModel->countAllResults(), 
+            'total_user'    => $this->userModel->countAllResults(),
+            
             'komik_terbaru' => $komikTerbaru,
             'komikAuthors'  => $komikAuthors, 
             'keyword'       => $keyword,

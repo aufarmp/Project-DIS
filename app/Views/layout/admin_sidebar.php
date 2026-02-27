@@ -40,9 +40,42 @@
                 <span class="text-sm font-medium text-white truncate"><?= session()->get('username') ?></span>
                 <span class="text-xs text-slate-400 truncate capitalize"><?= session()->get('role') ?></span>
             </div>
-            <a href="<?= base_url('logout') ?>" class="ml-auto text-slate-400 hover:text-red-400 transition-colors" title="Logout">
+            <button type="button" onclick="openAdminLogoutModal()" class="ml-auto text-slate-400 hover:text-red-400 transition-colors cursor-pointer border-none bg-transparent" title="Logout">
                 <span class="material-symbols-outlined text-[20px]">logout</span>
-            </a>
+            </button>
         </div>
     </div>
 </aside>
+
+<div id="adminLogoutModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 opacity-0 invisible transition-all duration-300">
+    <div class="fixed inset-0 bg-black/80 backdrop-blur-md" onclick="closeAdminLogoutModal()"></div>
+    <div id="adminLogoutBox" class="relative w-full max-w-sm scale-95 opacity-0 transition-all duration-300 rounded-2xl bg-[#1e293b] p-8 shadow-2xl border border-white/5 text-center">
+        <h3 class="text-xl font-bold text-white mb-2">Akhiri Sesi Admin?</h3>
+        <p class="text-sm text-slate-400 mb-6">Pastikan semua perubahan data komik telah Anda simpan sebelum keluar.</p>
+        <div class="flex flex-col gap-2">
+            <a href="<?= base_url('logout') ?>" class="w-full rounded-lg bg-red-600 py-3 text-sm font-bold text-white hover:bg-red-700 transition-all text-center">Ya, Logout Sekarang</a>
+            <button onclick="closeAdminLogoutModal()" class="w-full rounded-lg bg-transparent py-3 text-sm font-medium text-slate-500 hover:text-white transition-colors">Kembali</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const adminModal = document.getElementById('adminLogoutModal');
+    const adminBox = document.getElementById('adminLogoutBox');
+
+    function openAdminLogoutModal() {
+        adminModal.classList.remove('invisible', 'opacity-0');
+        adminModal.classList.add('opacity-100');
+        adminBox.classList.remove('scale-95', 'opacity-0');
+        adminBox.classList.add('scale-100', 'opacity-100');
+    }
+
+    function closeAdminLogoutModal() {
+        adminBox.classList.remove('scale-100', 'opacity-100');
+        adminBox.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            adminModal.classList.add('invisible', 'opacity-0');
+            adminModal.classList.remove('opacity-100');
+        }, 300);
+    }
+</script>

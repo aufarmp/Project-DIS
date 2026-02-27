@@ -33,18 +33,18 @@
 
         <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             <?php foreach ($komik as $k) : ?>
-                <a href="<?= base_url('komik/' . $k['slug']) ?>" class="group relative flex flex-col gap-3 rounded-xl bg-background-card p-3 ring-1 ring-white/5 transition-all hover:-translate-y-1 hover:ring-primary/50 hover:shadow-lg hover:shadow-primary/10">
+                <a href="<?= base_url('komik/' . $k->slug) ?>" class="group relative flex flex-col gap-3 rounded-xl bg-background-card p-3 ring-1 ring-white/5 transition-all hover:-translate-y-1 hover:ring-primary/50 hover:shadow-lg hover:shadow-primary/10">
                     <div class="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
-                        <img src="<?= base_url('assets/covers/' . $k['cover_image']) ?>" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" alt="<?= esc($k['title']) ?>">
+                        <img src="<?= base_url('assets/comics/' . $k->cover_image) ?>" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" alt="<?= esc($k->title) ?>">
                         <div class="absolute top-2 left-2 z-10 rounded bg-primary px-2 py-0.5 text-[10px] font-bold uppercase text-white shadow-sm">
-                            <?= esc($k['status']) ?>
+                            <?= esc($k->status) ?>
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-background-card/90 via-transparent to-transparent opacity-60"></div>
                     </div>
                     <div class="flex flex-col gap-1">
-                        <h3 class="truncate text-base font-bold text-white transition-colors group-hover:text-primary"><?= esc($k['title']) ?></h3>
+                        <h3 class="truncate text-base font-bold text-white transition-colors group-hover:text-primary"><?= esc($k->title) ?></h3>
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-medium text-text-secondary"><?= esc($k['genre_name'] ?? 'General') ?></span>
+                            <span class="text-xs font-medium text-text-secondary"><?= esc($k->genre_name ?? 'General') ?></span>
                         </div>
                     </div>
                 </a>

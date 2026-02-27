@@ -48,7 +48,6 @@ class InitialSchema extends Migration
             'description'     => ['type' => 'TEXT', 'null' => true],
             'cover_image'     => ['type' => 'VARCHAR', 'constraint' => 255, 'null' => true],
             'status'          => ['type' => 'ENUM', 'constraint' => ['ongoing', 'completed', 'hiatus'], 'default' => 'ongoing'],
-            // Kolom author dihapus, diganti relasi tabel baru
             'created_at'      => ['type' => 'DATETIME', 'null' => true],
             'updated_at'      => ['type' => 'DATETIME', 'null' => true],
             'deleted_at'      => ['type' => 'DATETIME', 'null' => true],

@@ -10,7 +10,7 @@ class UserModel extends Model
     protected $primaryKey       = 'user_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array'; // Return sebagai array agar mudah dikelola di session
-    protected $useSoftDeletes   = true;    // Mengaktifkan fitur deleted_at
+    protected $useSoftDeletes   = true;
 
     // Kolom yang diizinkan untuk diisi (Security)
     protected $allowedFields    = [
