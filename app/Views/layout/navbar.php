@@ -39,8 +39,12 @@
                 
                 <div class="relative group">
                     <button class="flex items-center gap-2 rounded-full ring-2 ring-transparent hover:ring-primary/50 transition-all p-1 pr-3 bg-background-card cursor-pointer">
-                        <div class="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-accent-purple flex items-center justify-center text-white font-bold text-sm shadow-md">
-                            <?= strtoupper(substr(session()->get('username'), 0, 1)) ?>
+                        <div class="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-accent-purple flex items-center justify-center text-white font-bold text-sm shadow-md overflow-hidden border border-white/10">
+                            <?php if(session()->get('profile_picture') && session()->get('profile_picture') !== '') : ?>
+                                <img src="<?= base_url('users/' . session()->get('profile_picture')) ?>" class="h-full w-full object-cover" alt="Profile">
+                            <?php else: ?>
+                                <?= strtoupper(substr(session()->get('username'), 0, 1)) ?>
+                            <?php endif; ?>
                         </div>
                         <span class="text-sm font-medium text-white truncate max-w-[100px]">
                             <?= esc(session()->get('username')) ?>
@@ -73,9 +77,9 @@
 
                             <div class="border-t border-white/5 my-1"></div>
                             
-                            <a href="<?= base_url('logout') ?>" class="flex items-center gap-3 px-4 py-2 text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors">
+                            <button type="button" onclick="openLogoutModal()" class="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors cursor-pointer border-none bg-transparent outline-none">
                                 <span class="material-symbols-outlined text-[20px]">logout</span> Logout
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -90,3 +94,39 @@
         </div>
     </div>
 </header>
+
+<div id="logoutModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 opacity-0 invisible transition-all duration-300">
+    <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" onclick="closeLogoutModal()"></div>
+    <div id="logoutModalBox" class="relative w-full max-w-sm scale-90 opacity-0 transition-all duration-300 rounded-2xl bg-background-card p-6 shadow-2xl ring-1 ring-white/10 text-center">
+        <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-red-500/10 text-red-500">
+            <span class="material-symbols-outlined text-3xl">logout</span>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Konfirmasi Logout</h3>
+        <p class="text-sm text-slate-400 mb-6">Apakah Anda yakin ingin keluar dari sesi ini?</p>
+        <div class="flex gap-3">
+            <button onclick="closeLogoutModal()" class="flex-1 rounded-xl bg-white/5 py-2.5 text-sm font-bold text-slate-300 hover:bg-white/10 transition-colors">Batal</button>
+            <a href="<?= base_url('logout') ?>" class="flex-1 rounded-xl bg-red-600 py-2.5 text-sm font-bold text-white hover:bg-red-700 shadow-lg shadow-red-600/20 transition-all">Keluar</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    const logModal = document.getElementById('logoutModal');
+    const logModalBox = document.getElementById('logoutModalBox');
+
+    function openLogoutModal() {
+        logModal.classList.remove('invisible', 'opacity-0');
+        logModal.classList.add('opacity-100');
+        logModalBox.classList.remove('scale-90', 'opacity-0');
+        logModalBox.classList.add('scale-100', 'opacity-100');
+    }
+
+    function closeLogoutModal() {
+        logModalBox.classList.remove('scale-100', 'opacity-100');
+        logModalBox.classList.add('scale-90', 'opacity-0');
+        setTimeout(() => {
+            logModal.classList.add('invisible', 'opacity-0');
+            logModal.classList.remove('opacity-100');
+        }, 300);
+    }
+</script>
