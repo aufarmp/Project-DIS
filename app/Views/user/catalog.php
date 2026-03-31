@@ -27,7 +27,7 @@
         </div>
         <?php endif; ?>
 
-    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         <?php if (!empty($komik)) : ?>
             <?php foreach ($komik as $index => $k) : ?>
                 <a href="<?= base_url('komik/' . $k->slug) ?>" class="group relative flex flex-col gap-3 rounded-xl bg-background-card p-3 ring-1 ring-white/5 transition-all hover:-translate-y-1 hover:ring-primary/50 hover:shadow-lg hover:shadow-primary/10">

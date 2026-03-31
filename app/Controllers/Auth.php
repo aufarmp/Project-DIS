@@ -35,7 +35,6 @@ class Auth extends BaseController
             // Verifikasi Password (Hash)
             if (password_verify($password, $user['password'])) {
                 
-                // Set Session Data - TAMBAHKAN EMAIL DI SINI
                 $ses_data = [
                     'user_id'         => $user['user_id'],
                     'username'        => $user['username'],
@@ -75,15 +74,12 @@ class Auth extends BaseController
         $data = [
             'title' => 'Daftar Akun - Comi.id'
         ];
-        
-        // Sesuaikan dengan letak folder view Anda (misal: auth/register atau user/register)
         return view('auth/register', $data); 
     }
 
     // 2. Memproses Data Input dari Form Register
     public function processRegister()
     {
-        // Aturan validasi input
         $rules = [
             'username'     => 'required|min_length[3]|max_length[100]|is_unique[tb_users.username]',
             'email'        => 'required|valid_email|is_unique[tb_users.email]',
@@ -91,12 +87,10 @@ class Auth extends BaseController
             'pass_confirm' => 'required|matches[password]'
         ];
 
-        // Jika validasi gagal, kembalikan ke form register beserta pesan error
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        // Jika validasi berhasil, simpan ke database (tabel tb_users)
         $db = \Config\Database::connect();
         $db->table('tb_users')->insert([
             'username'   => $this->request->getPost('username'),
@@ -106,8 +100,6 @@ class Auth extends BaseController
             'role'       => 'user', // Default role untuk pendaftar baru
             'created_at' => date('Y-m-d H:i:s')
         ]);
-
-        // Redirect ke halaman login dengan pesan sukses
         return redirect()->to('/login')->with('pesan', 'Registrasi berhasil! Silakan login dengan akun baru Anda.');
     }
 }

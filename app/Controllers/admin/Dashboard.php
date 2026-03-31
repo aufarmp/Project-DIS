@@ -3,8 +3,8 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\KomikModel; // Wajib dipanggil
-use App\Models\UserModel;  // Wajib dipanggil
+use App\Models\KomikModel; 
+use App\Models\UserModel; 
 
 class Dashboard extends BaseController
 {
@@ -12,7 +12,6 @@ class Dashboard extends BaseController
     protected $userModel;
     protected $db;
 
-    // Fungsi ini akan dijalankan pertama kali saat Dashboard dipanggil
     public function __construct()
     {
         $this->komikModel = new KomikModel();
@@ -35,11 +34,9 @@ class Dashboard extends BaseController
         if (!empty($status)) {
             $this->komikModel->where('status', $status);
         }
-
-        // Ambil data setelah difilter (Bisa juga dilimit jika ini dashboard, misal limit(10))
         $komikTerbaru = $this->komikModel->findAll();
 
-        // 3. Looping untuk mengambil Author seperti di halaman Kelola Komik
+        // 3. Looping untuk mengambil Authors untuk setiap Komik
         $komikAuthors = [];
         foreach ($komikTerbaru as $k) {
             $authors = $this->db->table('tb_komik_authors')
