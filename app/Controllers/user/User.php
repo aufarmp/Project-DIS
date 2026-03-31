@@ -11,7 +11,6 @@ class User extends BaseController
         $this->db = \Config\Database::connect();
     }
 
-    // Pengecekan Login (Fungsi Bantuan Internal)
     private function checkAuth()
     {
         if (!session()->get('isLoggedIn')) {
@@ -40,9 +39,8 @@ class User extends BaseController
 
         // Logika untuk Tab Bookmarks
         if ($tab === 'bookmarks') {
-            // Ambil data komik yang di-bookmark oleh user ini
             $komik = $this->db->table('tb_bookmarks')
-                              ->select('tb_komik.*') // Ambil data komiknya saja agar seragam dengan view catalog
+                              ->select('tb_komik.*')
                               ->join('tb_komik', 'tb_komik.komik_id = tb_bookmarks.komik_id')
                               ->where('tb_bookmarks.user_id', $userId)
                               ->orderBy('tb_bookmarks.created_at', 'DESC') // Urutkan dari yang terbaru disimpan

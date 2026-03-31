@@ -15,11 +15,11 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#256af4",         // Biru ciri khas Comi
+                        "primary": "#256af4",   
                         "primary-dark": "#1d54c4",    
                         "accent-purple": "#a855f7",
-                        "background-dark": "#16263B", // Navy gelap (Sesuai request)
-                        "surface-dark": "#1E324F",    // Navy lebih terang untuk Card/Sidebar
+                        "background-dark": "#16263B",
+                        "surface-dark": "#1E324F",  
                     },
                     fontFamily: {
                         display: ["Be Vietnam Pro", "sans-serif"],

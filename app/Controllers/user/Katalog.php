@@ -8,7 +8,7 @@ use App\Controllers\BaseController;
 class Katalog extends BaseController
 {
     protected $komikModel;
-    protected $db; // Tambahkan instance database untuk query Join/Builder
+    protected $db;
 
     public function __construct()
     {
@@ -22,7 +22,6 @@ class Katalog extends BaseController
         $keyword = $this->request->getVar('q'); 
         
         $komik = [];
-        // Pastikan hanya mencari jika ada keyword yang diketik
         if (!empty($keyword)) {
             $komik = $this->komikModel->like('title', $keyword)->findAll();
         }
@@ -38,9 +37,8 @@ class Katalog extends BaseController
 
     // 2. Halaman Populer
     public function popular()
-    {
-        // Logika Populer: Mengambil 10 komik teratas berdasarkan jumlah user yang mem-bookmark komik tersebut.
-        // Jika belum ada data bookmark, otomatis akan diurutkan berdasarkan komik terbaru.
+    {        
+        // Ambil data komik beserta jumlah bookmark-nya, urutkan dari yang paling banyak di-bookmark
         $komikPopuler = $this->komikModel->select('tb_komik.*, COUNT(tb_bookmarks.komik_id) as bookmark_count')
                                          ->join('tb_bookmarks', 'tb_bookmarks.komik_id = tb_komik.komik_id', 'left')
                                          ->groupBy('tb_komik.komik_id')

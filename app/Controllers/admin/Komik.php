@@ -54,7 +54,6 @@ class Komik extends BaseController
             'title'        => 'Kelola Komik - Admin',
             'komik'        => $komikData,
             'komikAuthors' => $komikAuthors,
-            // Lempar parameter kembali ke view
             'keyword'      => $keyword,
             'status'       => $status
         ];
@@ -359,5 +358,5 @@ class Komik extends BaseController
         session()->setFlashdata('pesan', 'Komik "' . $komik->title . '" berhasil dihapus secara permanen beserta filenya.');
         return redirect()->to('/admin/komik');
     }
-
+    
 }

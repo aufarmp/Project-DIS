@@ -74,10 +74,20 @@ $routes->group('user', ['namespace' => 'App\Controllers\User'], static function 
 
 
     // --- REST API ROUTES ---
-$routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
-    $routes->get('komik', 'Komik::index');               // Menampilkan semua komik
-    $routes->get('komik/(:num)', 'Komik::show/$1');      // Menampilkan 1 komik spesifik
-    $routes->post('komik', 'Komik::create');             // Menambah komik baru
-    $routes->put('komik/(:num)', 'Komik::update/$1');    // Mengubah komik
-    $routes->delete('komik/(:num)', 'Komik::delete/$1'); // Menghapus komik
+$routes->group('api', ['namespace' => 'App\Controllers\Api'], function($routes) {
+    // Auth Routes (Flutter)
+    $routes->post('auth/login', 'Auth::login');
+    $routes->post('auth/register', 'Auth::register');
+
+    // Komik Routes (CI4 dan Flutter)
+    $routes->get('komik/genres', 'Komik::genres');
+    $routes->resource('komik', ['controller' => 'Komik']); // route utama untuk API CI4, flutter bisa pakai yang sama
+
+    // Chapter Route (Flutter)
+    $routes->get('chapter/(:num)', 'Chapter::show/$1');
+
+    // User Routes (Library & Bookmark utk Flutter)
+    $routes->get('user/library/(:num)', 'User::library/$1');
+    $routes->post('user/bookmark', 'User::toggleBookmark');
+    $routes->get('user/history/(:num)', 'User::history/$1');
 });

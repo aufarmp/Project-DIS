@@ -9,10 +9,10 @@ class UserModel extends Model
     protected $table            = 'tb_users';
     protected $primaryKey       = 'user_id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array'; // Return sebagai array agar mudah dikelola di session
+    protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
 
-    // Kolom yang diizinkan untuk diisi (Security)
+    // Kolom yang diizinkan untuk diisi
     protected $allowedFields    = [
         'username', 'email', 'password', 'role', 'profile_picture'
     ];

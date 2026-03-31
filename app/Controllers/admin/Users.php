@@ -16,11 +16,10 @@ class Users extends BaseController
 
     public function index()
     {
-        // 1. Tangkap inputan dari form pencarian dan filter
+        // Tangkap inputan dari form pencarian dan filter
         $keyword = $this->request->getGet('keyword');
         $role    = $this->request->getGet('role');
 
-        // 2. Jika ada keyword pencarian (berdasarkan username atau email)
         if (!empty($keyword)) {
             $this->userModel->groupStart()
                             ->like('username', $keyword)
@@ -28,18 +27,15 @@ class Users extends BaseController
                             ->groupEnd();
         }
 
-        // 3. Jika ada filter role (Admin / User)
         if (!empty($role)) {
             $this->userModel->where('role', $role);
         }
 
-        // Ambil data yang sudah difilter (jika tidak ada filter, otomatis ambil semua)
         $usersData = $this->userModel->findAll();
 
         $data = [
             'title'   => 'Kelola Pengguna - Admin',
             'users'   => $usersData,
-            // Kirim kembali keyword dan role ke view agar inputan/pilihan tidak hilang setelah di-refresh
             'keyword' => $keyword,
             'role'    => $role 
         ];
